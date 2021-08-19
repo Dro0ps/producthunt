@@ -16,14 +16,14 @@ const useValidacion = (stateInicial, validar, fn) => {
                 }
                 guardarSubmitForm(false);
             }
-        }, []);
+        }, [errores]);
 
-        // Funcion que se ejecuta conforme el ususairo escribe algo
+        // Funcion que se ejecuta conforme el usuario escribe algo
 
         const handleChange = e => {
             guardarValores({
                 ...valores,
-                [e.target.name] : e.targer.value
+                [e.target.name] : e.target.value
             })
         }
 
@@ -34,13 +34,17 @@ const useValidacion = (stateInicial, validar, fn) => {
             guardarSubmitForm(true);
         }
 
+        const handleBlur = () => {
+            const erroresValidacion = validar(valores);
+            guardarErrores(erroresValidacion);
+        }
 
     return {
         valores,
         errores,
-        submitForm,
         handleSubmit,
-        handleChange
+        handleChange,
+        handleBlur
 
     };
 }

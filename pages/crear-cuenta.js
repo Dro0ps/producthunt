@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import React from 'react';
 import Layout from '../components/layout/layout';
-import { Formulario, Campo, InputSubmit } from '../components/ui/Formulario';
+import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 
 
 // VALIDACIONES
@@ -18,8 +18,10 @@ const STATE_INICIAL = {
 
 const CrearCuenta = () =>  {
 
-  const { valores, errores, submitForm, handleSubmit, handleChange } = 
+  const { valores, errores, handleSubmit, handleChange, handleBlur } = 
   useValidacion(STATE_INICIAL, validarCrearCuenta, crearCuenta );
+
+  const { nombre, email, password } = valores;
 
   function crearCuenta(){
     console.log('Creando cuenta...')
@@ -41,7 +43,10 @@ const CrearCuenta = () =>  {
             margin-top: 5rem;
           `}
         >Crear Cuenta</h1>
-        <Formulario>
+        <Formulario
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <Campo>
             <label htmlFor="nombre">Nombre</label>
             <input
@@ -49,8 +54,13 @@ const CrearCuenta = () =>  {
               id="nombre"
               placeholder="Tu Nombre"
               name="nombre"
+              value={nombre}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </Campo>
+
+          {errores.nombre && <Error>{errores.nombre}</Error>}
 
           <Campo>
             <label htmlFor="email">Email</label>
@@ -59,8 +69,13 @@ const CrearCuenta = () =>  {
               id="email"
               placeholder="Tu Email"
               name="email"
+              value={email}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </Campo>
+
+          {errores.email && <Error>{errores.email}</Error>}
 
           <Campo>
             <label htmlFor="password">Password</label>
@@ -69,8 +84,13 @@ const CrearCuenta = () =>  {
               id="password"
               placeholder="Tu Password"
               name="password"
+              value={password}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </Campo>
+
+          {errores.password && <Error>{errores.password}</Error>}
 
           <InputSubmit 
           

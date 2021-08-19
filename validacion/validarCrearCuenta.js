@@ -9,7 +9,7 @@ export default function validarCrearCuenta(valores) {
     // validar el email
     if(!valores.email){
         errores.email ="El Email es Obligatorio"
-    } else if( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i ) {
+    } else if( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(valores.email) ) {
         errores.email = "Email no valido"
     }
 
@@ -17,7 +17,7 @@ export default function validarCrearCuenta(valores) {
     if(!valores.password) {
         errores.password = "El password es obligatorio";
         
-    } else if( valores.password.length > 6 ) {
+    } else if( valores.password.length < 6 ) {
         errores.password = 'El password debe ser de al menos 6 caracteres'
     }
 

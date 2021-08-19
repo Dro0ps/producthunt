@@ -27,7 +27,7 @@ export const Campo = styled.div`
 export const InputSubmit = styled.input`
     background-color: var(--naranja);
     width: 100%;
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: center;
     color:#fff;
     font-size: 1.8rem;
@@ -40,4 +40,17 @@ export const InputSubmit = styled.input`
         cursor: pointer;
     }
 
+`;
+
+export const Error = styled.p`
+    background-color: red;
+    padding: 0.5rem;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    border-radius: 50px;
 `;
