@@ -9,11 +9,12 @@ const InputText = styled.input`
     min-width: 300px;
 `;
 
-const InputSubmit = styled.input`
+const InputSubmit = styled.button`
     height: 3rem;
-    width: 3 rem;
+    width: 3rem;
     display: block;
-    background-size: 4 rem;
+    margin-top: 0.5rem;
+    background-size: 3rem;
     background-image: url('/static/img/buscar.png');
     background-repeat: no-repeat;
     position: absolute;
@@ -21,7 +22,8 @@ const InputSubmit = styled.input`
     top: 1px;
     background-color: white;
     border: none;
-    text-indent: --9999px;
+    text-indent: -9999px;
+   
 
 
     &:hover {
@@ -35,9 +37,9 @@ const InputSubmit = styled.input`
 const Buscar = () => {
     return ( 
         <form
-            /* css={css`
+            css={css`
                 position: relative;          
-            `}    */     
+            `}      
         >
             <InputText 
                 type="text"
@@ -45,7 +47,7 @@ const Buscar = () => {
             
             ></InputText>
 
-            <InputSubmit type="submit"></InputSubmit>
+            <InputSubmit >Buscar</InputSubmit>
 
             
 
