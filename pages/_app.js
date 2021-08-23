@@ -4,7 +4,7 @@ import useAtenticacion from '../hooks/useAutenticacion';
 
 const MyApp = props => {
     const usuario = useAtenticacion();
-    console.log(usuario);
+    
 
     const { Component, pageProps } = props;
 
