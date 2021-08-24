@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
+import DetallesProducto from '../components/layout/DetallesProducto';
 import Layout from '../components/layout/layout';
 import { FirebaseContext } from '../firebase';
+import NuevoProducto from './nuevo-producto';
+
 
 
 
@@ -19,14 +22,19 @@ const Home = () => {
   }, []);
 
   function manejarSnapshot(snapshop){
-    const productos = snapshot.docs.map(doc => {
+    const productos = snapshop.docs.map(doc => {
       return {
         id: doc.id,
       ...doc.data()
       }
       
     });
+
+    guardarProductos(productos);
+  
+    
   }
+
   
   
   
@@ -38,7 +46,20 @@ const Home = () => {
     <div>
 
       <Layout>
-        <h1>Inicio</h1>
+        <div className="listado-productos">
+          <div className="contenedor">
+            <ul className="bg-white">
+            
+            {/* Se pasan los valores de cada producto al componente DetallesProducto a traves del key y el props producto = {producto} */}
+              {productos.map(producto => (
+                <DetallesProducto
+                  key = {producto.id}
+                  producto = {producto}
+                />
+              ))}
+            </ul>
+          </div>
+        </div>
       </Layout>
 
 
