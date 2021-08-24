@@ -7,6 +7,7 @@ import Layout from '../../components/layout/layout';
 import { FirebaseContext } from '../../firebase';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { es } from 'date-fns/locale';
+import { Campo, InputSubmit } from '../../components/ui/Formulario';
 
 
 const ContenedorProducto = styled.div`
@@ -81,6 +82,38 @@ const Producto = (props) => {
                     <ContenedorProducto>
                         <div>
                             <p>Publicado hace: {formatDistanceToNow( new Date(creado), {locale: es} )}</p>
+
+                            <img src={imagenUrl}/>
+                            <p>{descripcion}</p>
+
+                            <h2>Agrega tu comentario</h2>
+                            <form>
+                                <Campo>
+                                    <input
+                                        type="text"
+                                        name="mensaje"
+                                    />
+                                </Campo>
+                                <InputSubmit
+                                    type="submit"
+                                    value="Agregar Comentario"
+                                />
+                                    
+                            </form>
+
+                            <h2 css={css`
+                                margin: 2rem 0;
+                            `}
+                            
+                            >Comentarios</h2>
+
+                            {comentarios.map(comentario => (
+                                <li>
+                                    <p>{comentario.nombre}</p>
+                                    <p>Escrito por: {comentario.usuario.nombre}</p>
+                                </li>
+                            ))}
+
                         </div>
 
                         <aside>
