@@ -86,7 +86,7 @@ const Producto = (props) => {
 
 
     // Administrar y validar los votos
-    const votarProducto = () => {
+    const votarProducto = async() => {
         if(!usuario) {
             return router.push('/login')
         }
@@ -107,7 +107,7 @@ const Producto = (props) => {
         })
 
         // actualizar el State
-        guardarProducto({
+        await guardarProducto({
             ...producto,
             votos: nuevoTotal
         })
@@ -158,9 +158,36 @@ const Producto = (props) => {
 
         guardarConsultarDB(true); // Hay un comentario por lo tanto consultar la base de datos
 
-
-
     }
+
+    // Funcion que revisa si el creador del producto es el mismo que esta autenticado
+    const puedeBorrar = () => {
+        if(!usuario) return false;
+
+        if(creador.id === usuario.uid) {
+            return true;
+        }
+    }
+
+    // Elimina un producto de la Base de Datos
+    const eliminarProducto = async () => {
+        if(!usuario) {
+            return router.push('/login')
+        }
+
+        if(creador.id !== usuario.uid) {
+            return router.push('/')
+        }
+
+        try {
+            await firebase.db.collection('productos').doc(id).delete();
+            router.push('/')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
     return ( 
         <>
@@ -264,16 +291,19 @@ const Producto = (props) => {
                             <Boton
                                 onClick={votarProducto}
                             
-                            >Votar</Boton>
-                            
-                            
+                            >Votar</Boton>                      
                             ) }
-
                                 
                             </div>
                             
                         </aside>
                     </ContenedorProducto>
+
+                    { (puedeBorrar && usuario ) && 
+                        <Boton
+                            onClick={eliminarProducto}
+                        >Eliminar Producto</Boton>
+                    }
 
 
 

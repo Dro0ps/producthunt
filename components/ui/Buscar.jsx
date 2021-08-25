@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 const InputText = styled.input`
@@ -35,28 +35,32 @@ const InputSubmit = styled.button`
 
 
 const Buscar = () => {
+
+    const  [ busqueda, guardarBusqueda ] = useState('');
+
+    const buscarProducto = e => {
+        e.preventDefault();
+
+        console.log('buscando...', busqueda );
+    }
+
     return ( 
         <form
             css={css`
                 position: relative;          
-            `}      
+            `} 
+            onSubmit={buscarProducto}     
         >
             <InputText 
                 type="text"
                 placeholder='Buscar Productos'
+                onChange={ e => guardarBusqueda(e.target.value) }
             
             ></InputText>
 
             <InputSubmit >Buscar</InputSubmit>
 
-            
 
-            
-            
-            
-            
-            
-            
         </form>
 
 
