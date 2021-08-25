@@ -67,7 +67,6 @@ const Layout = (props) => {
       />
 
       <Head>
-        <html lang="es" />
         <title>Proyecto con Firebase y Next</title>
         <link
           rel="stylesheet"

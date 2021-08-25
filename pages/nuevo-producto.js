@@ -10,6 +10,7 @@ import { FirebaseContext } from '../firebase';
 // VALIDACIONES
 import useValidacion from '../hooks/useValidacion';
 import validarCrearProducto from '../validacion/validarCrearProducto';
+import Error404 from '../components/layout/404';
 
 
 const STATE_INICIAL = {
@@ -36,6 +37,7 @@ const NuevoProducto = () =>  {
 
   // Context con las operaciones Crud de Firebase
   const {usuario, firebase}= useContext(FirebaseContext);
+
 
   // Manejando las imagenes
   const handleFile = e => {
@@ -69,7 +71,12 @@ const NuevoProducto = () =>  {
       descripcion,
       votos: 0,
       comentarios: [],
-      creado: Date.now()
+      creado: Date.now(),
+      creador: {
+        id: usuario.uid,
+        nombre: usuario.displayName
+      },
+      haVotado: []
     }
 
     // Insertarlo en la base de datos
@@ -87,6 +94,9 @@ const NuevoProducto = () =>  {
     <div>
 
       <Layout>
+        { !usuario ? <Error404/> : 
+        
+        (
         <>
         <h1
           css={css`
@@ -123,7 +133,7 @@ const NuevoProducto = () =>  {
             <input
               type="text"
               id="empresa"
-              placeholder="Tu Nombre"
+              placeholder="Nombre de la empresa"
               name="empresa"
               value={empresa}
               onChange={handleChange}
@@ -194,6 +204,10 @@ const NuevoProducto = () =>  {
 
 
         </>
+        )
+        
+        }
+        
 
       </Layout>
 

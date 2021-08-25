@@ -9,7 +9,7 @@ const Error404 = () => {
         margin-top: 5rem;
         text-align: center;
     `}
-    >Producto no Existente</h1>
+    >Error404</h1>
     
     );
 }

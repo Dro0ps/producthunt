@@ -98,7 +98,7 @@ const DetallesProducto = ({producto}) => {
                 </div>
                 <div>
                      {/* Creando Routing Dymanico de Next */}
-                    <Link href="/productos/[id]" as={`/productos/${id}`}>
+                    <Link href="/productos/[id]" as={`/productos/${id}`} >
                         <Titulo>{nombre}</Titulo>
                     </Link>
                     
