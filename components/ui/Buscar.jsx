@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Router from 'next/router';
 import React, { useState } from 'react';
+
 
 
 const InputText = styled.input`
@@ -41,7 +43,15 @@ const Buscar = () => {
     const buscarProducto = e => {
         e.preventDefault();
 
-        console.log('buscando...', busqueda );
+        if(busqueda.trim() === '') return;
+
+        // Redireccionar a Buscar y pasar valores a un componente en especifico
+        Router.push({
+            pathname: '/buscar',
+            query: { q : busqueda }
+        });
+
+        
     }
 
     return ( 
@@ -49,7 +59,8 @@ const Buscar = () => {
             css={css`
                 position: relative;          
             `} 
-            onSubmit={buscarProducto}     
+            onSubmit={buscarProducto}  
+              
         >
             <InputText 
                 type="text"
@@ -58,7 +69,7 @@ const Buscar = () => {
             
             ></InputText>
 
-            <InputSubmit >Buscar</InputSubmit>
+            <InputSubmit type="submit">Buscar</InputSubmit>
 
 
         </form>
